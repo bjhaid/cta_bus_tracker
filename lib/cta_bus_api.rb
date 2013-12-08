@@ -16,6 +16,15 @@ class CtaBusApi
     parsed_response.xpath("//route//rtnm").map(&:text)
   end
 
+  def vehicles
+    call_url "getvehicles"
+    index = 1
+    parsed_response.xpath("//vehicle").map do |vehicle|
+      vehicle.children.each_with_object({}) { |vehicle_attr,hash|
+      hash[vehicle_attr.name] = vehicle_attr.text }
+    end
+  end
+
   private
   def call_url extension
     response = open("http://localhost:9292/bustime/api/v1/#{extension}")
