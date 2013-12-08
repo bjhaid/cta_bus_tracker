@@ -21,4 +21,9 @@ describe CtaBusApi do
   it "gets all the available stops" do
     expect(subject.stops).to eq([{"stpid"=>"4727", "stpnm"=>"1633 W Madison", "lat"=>"41.881265", "lon"=>"-87.66849"}, {"stpid"=>"9604", "stpnm"=>"Austin & Pleasant/Fulton", "lat"=>"41.885206667", "lon"=>"-87.7748733333333"}, {"stpid"=>"9605", "stpnm"=>"Austin & Randolph/West End", "lon"=>"41.8838633333333", "lat"=>"-87.7748566666667"}, {"stpid"=>"9603", "stpnm"=>"Austin & South Blvd/Corcoran", "lat"=>"41.886908333", "lon"=>"-87.77493667"}])
   end
+
+  it "gets all the available patterns" do
+    expect(subject.patterns).to eq([{"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>{"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}}])
+  end
+
 end

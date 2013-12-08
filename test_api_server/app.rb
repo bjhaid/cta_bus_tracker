@@ -30,3 +30,9 @@ get "/bustime/api/v1/getstops" do
   content_type "text/xml"
   send_file "get_stops.xml"
 end
+
+# http://www.ctabustracker.com/bustime/api/v1/getpatterns
+get "/bustime/api/v1/getpatterns" do
+  content_type "text/xml"
+  send_file "get_patterns.xml"
+end

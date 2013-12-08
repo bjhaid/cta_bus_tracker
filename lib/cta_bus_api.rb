@@ -38,6 +38,19 @@ class CtaBusApi
     end
   end
 
+  def patterns
+    call_url "getpatterns"
+    parsed_response.xpath("//ptr").map do |ptr|
+      ptr.children.each_with_object({}) do |ele,hash|
+        if ele.children.any? { |child| child.is_a? Nokogiri::XML::Element }
+          hash[ele.name] = ele.children.each_with_object({}) { |e,child_hash| child_hash[e.name] = e.text }
+        else
+          hash[ele.name] = ele.text
+        end
+      end
+    end
+  end
+
   private
   def call_url extension
     response = open("http://localhost:9292/bustime/api/v1/#{extension}")

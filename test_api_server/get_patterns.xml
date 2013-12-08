@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<bustime-response>
+  <ptr>
+    <pid>954</pid>
+    <ln>35569</ln>
+    <rtdir>East Bound</rtdir>
+    <pt>
+      <seq>1</seq>
+      <typ>S</typ>
+      <stpid>409</stpid>
+      <stpnm>Madison &amp; Pulaski</stpnm>
+      <lat>41.880641167057</lat>
+      <lon>-87.725835442543</lon>
+      <pdist>0.0</pdist>
+    </pt>
+    <pt>
+      <seq>2</seq>
+      <typ>W</typ>
+      <lat>41.880693089146</lat>
+      <lon>-87.725765705109</lon>
+    </pt>
+    <pt>
+      <seq>3</seq>
+      <typ>W</typ>
+      <lat>41.880693089146</lat>
+      <lon>-87.725674510002</lon>
+      <pdist>97.0</pdist>
+    </pt> 
+  </ptr>
+</bustime-response>
