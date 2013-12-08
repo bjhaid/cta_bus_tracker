@@ -36,3 +36,9 @@ get "/bustime/api/v1/getpatterns" do
   content_type "text/xml"
   send_file "get_patterns.xml"
 end
+
+# http://www.ctabustracker.com/bustime/api/v1/getpredictions
+get "/bustime/api/v1/getpredictions" do
+  content_type "text/xml"
+  send_file "get_predictions.xml"
+end

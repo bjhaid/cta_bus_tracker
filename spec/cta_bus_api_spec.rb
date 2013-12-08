@@ -26,4 +26,7 @@ describe CtaBusApi do
     expect(subject.patterns).to eq([{"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>{"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}}])
   end
 
+  it "get all the available predictions" do
+    expect(subject.predictions).to eq([{"tmstmp"=>"20090611 14:34", "typ"=>"A", "stpid"=>"456", "stpnm"=>"Madison & Jefferson", "vid"=>"2013", "dstp"=>"891", "rt"=>"20", "rtdir"=>"West Bound", "rtdst"=>"Austin", "prdtm"=>"20090611 14:40"}, {"tmstmp"=>"20090611 14:34", "typ"=>"A", "stpid"=>"456", "stpnm"=>"Madison & Jefferson", "vid"=>"6435", "dstp"=>"1587", "rt"=>"20", "rtdir"=>"West Bound", "rtdst"=>"Austin", "prdtm"=>"20090611 14:48"}])
+  end
 end

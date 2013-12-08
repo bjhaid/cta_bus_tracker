@@ -51,6 +51,16 @@ class CtaBusApi
     end
   end
 
+  def predictions
+    call_url "getpredictions"
+    parsed_response.xpath("//prd").map do |prediction|
+      prediction.children.each_with_object({}) do
+        |ele, hash|
+        hash[ele.name] = ele.text
+      end
+    end
+  end
+
   private
   def call_url extension
     response = open("http://localhost:9292/bustime/api/v1/#{extension}")
