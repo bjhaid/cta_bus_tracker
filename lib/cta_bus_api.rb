@@ -61,6 +61,15 @@ class CtaBusApi
     end
   end
 
+  def service_bulletins
+    call_url "getservicebulletins"
+    parsed_response.xpath("//sb").map do |sb|
+      sb.children.each_with_object({}) do |ele,hash|
+        hash[ele.name] = ele.text
+      end
+    end
+  end
+
   private
   def call_url extension
     response = open("http://localhost:9292/bustime/api/v1/#{extension}")

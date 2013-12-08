@@ -29,4 +29,8 @@ describe CtaBusApi do
   it "get all the available predictions" do
     expect(subject.predictions).to eq([{"tmstmp"=>"20090611 14:34", "typ"=>"A", "stpid"=>"456", "stpnm"=>"Madison & Jefferson", "vid"=>"2013", "dstp"=>"891", "rt"=>"20", "rtdir"=>"West Bound", "rtdst"=>"Austin", "prdtm"=>"20090611 14:40"}, {"tmstmp"=>"20090611 14:34", "typ"=>"A", "stpid"=>"456", "stpnm"=>"Madison & Jefferson", "vid"=>"6435", "dstp"=>"1587", "rt"=>"20", "rtdir"=>"West Bound", "rtdst"=>"Austin", "prdtm"=>"20090611 14:48"}])
   end
+
+  it "gets all the available service bulletins" do
+    expect(subject.service_bulletins).to eq([{"sbj"=>"Stop Relocation", "dtl"=>"The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "brf"=>" The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "prty"=>"low", "srvc"=>"20"}, {"sbj"=>"Stop Relocations/Eliminations", "dtl"=>"Bus stops are being changed to provide faster travel time.", "brf"=>"Bus stops are being changed to provide faster travel time.", "prty"=>"low", "srvc"=>"456"}])
+  end
 end

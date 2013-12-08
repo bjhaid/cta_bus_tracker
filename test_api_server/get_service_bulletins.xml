@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<bustime-response>
+<sb>
+<sbj>Stop Relocation</sbj>
+<dtl>The westbound stop located at Madison/Lavergne has been moved to the northeast corner at
+Madison/Lavergne.</dtl>
+<brf> The westbound stop located at Madison/Lavergne has been moved to the northeast corner at
+Madison/Lavergne.</brf>
+           <prty>low</prty>
+           <srvc>
+                <rt>20</rt>
+           </srvc>
+     </sb>
+<sb>
+<sbj>Stop Relocations/Eliminations</sbj>
+<dtl>Bus stops are being changed to provide faster travel time.</dtl> <brf>Bus stops are being changed to provide faster travel time.</brf> <prty>low</prty>
+<srvc>
+                <stpid>456</stpid>
+           </srvc>
+</sb>
+</bustime-response>
