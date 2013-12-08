@@ -18,3 +18,15 @@ get "/bustime/api/v1/getvehicles" do
   content_type "text/xml"
   send_file "get_vehicles.xml"
 end
+
+# http://www.ctabustracker.com/bustime/api/v1/getdirections
+get "/bustime/api/v1/getdirections" do
+  content_type "text/xml"
+  send_file "get_directions.xml"
+end
+
+# http://www.ctabustracker.com/bustime/api/v1/getstops
+get "/bustime/api/v1/getstops" do
+  content_type "text/xml"
+  send_file "get_stops.xml"
+end

@@ -18,10 +18,23 @@ class CtaBusApi
 
   def vehicles
     call_url "getvehicles"
-    index = 1
     parsed_response.xpath("//vehicle").map do |vehicle|
       vehicle.children.each_with_object({}) { |vehicle_attr,hash|
       hash[vehicle_attr.name] = vehicle_attr.text }
+    end
+  end
+
+  def directions
+    call_url "getdirections"
+    parsed_response.xpath("//dir").map(&:text)
+  end
+
+  def stops
+    call_url "getstops"
+    parsed_response.xpath("//stop").map do |stop|
+     stop.children.each_with_object({}) do |ele,hash|
+       hash[ele.name] = ele.text
+     end
     end
   end
 
