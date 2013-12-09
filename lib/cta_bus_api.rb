@@ -5,7 +5,8 @@ require "open-uri"
 class CtaBusApi
 
   attr_accessor :url
-  def initialize(key: you_must_supply_a_key)
+  def initialize(options = {})
+    @key = options[:key]
     @url ||= "http://localhost:9292/bustime/api/v1/"
   end
 
