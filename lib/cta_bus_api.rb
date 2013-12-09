@@ -4,7 +4,9 @@ require "open-uri"
 
 class CtaBusApi
 
+  attr_accessor :url
   def initialize(key: you_must_supply_a_key)
+    @url ||= "http://localhost:9292/bustime/api/v1/"
   end
 
   def current_time
@@ -49,7 +51,7 @@ class CtaBusApi
 
   private
   def call_url extension
-    response = open("http://localhost:9292/bustime/api/v1/#{extension}")
+    response = open(url + extension)
     parser = Nori.new
     @parsed_response = parser.parse(response.string)
   end
