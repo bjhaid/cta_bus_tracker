@@ -9,6 +9,7 @@ GEM
     multi_json (1.8.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    nori (2.3.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -45,6 +46,7 @@ PLATFORMS
 
 DEPENDENCIES
   nokogiri
+  nori
   pry
   rspec (= 2.14.1)
   sinatra (= 1.4.4)

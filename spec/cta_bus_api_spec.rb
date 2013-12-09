@@ -3,11 +3,11 @@ require "spec_helper"
 describe CtaBusApi do
   let(:subject) { described_class.new(key: "hello") }
   it "gets the current time from the api" do
-    expect(subject.current_time).to eq("20090611 14:42:32")
+    expect(subject.current_time).to eq({"tm"=>"20090611 14:42:32"})
   end
 
   it "gets all the available routes" do
-    expect(subject.routes).to eq(["Indiana/Hyde Park", "Hyde Park Express", "King Drive", "King Drive Express"])
+    expect(subject.routes).to eq([{"rt"=>"1", "rtnm"=>"Indiana/Hyde Park"}, {"rt"=>"2", "rtnm"=>"Hyde Park Express"}, {"rt"=>"3", "rtnm"=>"King Drive"}, {"rt"=>"X3", "rtnm"=>"King Drive Express"}])
   end
 
   it "gets all the available vehicles" do
@@ -23,7 +23,7 @@ describe CtaBusApi do
   end
 
   it "gets all the available patterns" do
-    expect(subject.patterns).to eq([{"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>{"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}}])
+    expect(subject.patterns).to eq({"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>[{"seq"=>"1", "typ"=>"S", "stpid"=>"409", "stpnm"=>"Madison & Pulaski", "lat"=>"41.880641167057", "lon"=>"-87.725835442543", "pdist"=>"0.0"}, {"seq"=>"2", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725765705109"}, {"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}]})
   end
 
   it "get all the available predictions" do
@@ -31,6 +31,6 @@ describe CtaBusApi do
   end
 
   it "gets all the available service bulletins" do
-    expect(subject.service_bulletins).to eq([{"sbj"=>"Stop Relocation", "dtl"=>"The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "brf"=>" The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "prty"=>"low", "srvc"=>"20"}, {"sbj"=>"Stop Relocations/Eliminations", "dtl"=>"Bus stops are being changed to provide faster travel time.", "brf"=>"Bus stops are being changed to provide faster travel time.", "prty"=>"low", "srvc"=>"456"}])
+    expect(subject.service_bulletins).to eq([{"sbj"=>"Stop Relocation", "dtl"=>"The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "brf"=>" The westbound stop located at Madison/Lavergne has been moved to the northeast corner at\nMadison/Lavergne.", "prty"=>"low", "srvc"=>{"rt"=>"20"}}, {"sbj"=>"Stop Relocations/Eliminations", "dtl"=>"Bus stops are being changed to provide faster travel time.", "brf"=>"Bus stops are being changed to provide faster travel time.", "prty"=>"low", "srvc"=>{"stpid"=>"456"}}])
   end
 end
