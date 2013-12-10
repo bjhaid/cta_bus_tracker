@@ -36,7 +36,9 @@ class CtaBusApi
     parsed_response["bustime_response"]["stop"]
   end
 
-  def patterns
+  def patterns(route_id,pattern_id)
+    raise "route_id should be an Integer" unless route_id.is_a? Integer
+    raise "pattern_id should be an Integer" unless pattern_id.is_a? Integer
     call_url "getpatterns"
     parsed_response["bustime_response"]["ptr"]
   end
