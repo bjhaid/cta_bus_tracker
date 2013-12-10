@@ -6,8 +6,15 @@ describe CtaBusApi do
     expect(subject.current_time).to eq({"tm"=>"20090611 14:42:32"})
   end
 
-  it "gets all the available routes" do
-    expect(subject.routes).to eq([{"rt"=>"1", "rtnm"=>"Indiana/Hyde Park"}, {"rt"=>"2", "rtnm"=>"Hyde Park Express"}, {"rt"=>"3", "rtnm"=>"King Drive"}, {"rt"=>"X3", "rtnm"=>"King Drive Express"}])
+  context "route" do
+
+    it "gets all the available routes" do
+      expect(subject.routes(49)).to eq([{"rt"=>"1", "rtnm"=>"Indiana/Hyde Park"}, {"rt"=>"2", "rtnm"=>"Hyde Park Express"}, {"rt"=>"3", "rtnm"=>"King Drive"}, {"rt"=>"X3", "rtnm"=>"King Drive Express"}])
+    end
+
+    it "should raise exception if route_id is not an integer" do
+      expect { subject.route(49.5) }.to raise_error
+    end
   end
 
   it "gets all the available vehicles" do

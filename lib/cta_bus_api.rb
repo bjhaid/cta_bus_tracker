@@ -15,8 +15,9 @@ class CtaBusApi
     parsed_response["bustime_response"]
   end
 
-  def routes
-    call_url "getroutes"
+  def routes(route_id)
+    raise "route_id must be an integer" unless route_id.is_a? Integer
+    call_url "getroutes?route=#{route_id}"
     parsed_response["bustime_response"]["route"]
   end
 
