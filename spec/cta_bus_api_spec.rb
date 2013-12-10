@@ -2,6 +2,13 @@ require "spec_helper"
 
 describe CtaBusApi do
   let(:subject) { described_class.new(key: nil) }
+
+  it "generates correct url if the key is supplied" do
+    subject.instance_variable_set(:@key, "7kljjhghhhj")
+    subject.stub(:call_url)
+    subject.routes({route_id: 49})
+    expect(subject).to have_received(:call_url).with("getroutes?route_id=49&key=7kljjhghhhj")
+  end
   it "gets the current time from the api" do
     expect(subject.current_time).to eq({"tm"=>"20090611 14:42:32"})
   end

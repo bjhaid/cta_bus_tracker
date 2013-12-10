@@ -74,7 +74,7 @@ class CtaBusApi
 
   def convert_to_extension options
     options.merge! key: @key unless @key.nil?
-    "#{options.delete(:path)}?#{options.inject("") { |str,(k,v)| str << "#{k}=#{v}" } }"
+    "#{options.delete(:path)}?#{options.to_a.map { |pairs| pairs.join("=") }.join("&") }"
   end
   attr_reader :parsed_response
 end
