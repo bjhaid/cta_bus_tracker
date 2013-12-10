@@ -1,19 +1,25 @@
 require "spec_helper"
 
 describe CtaBusApi do
-  let(:subject) { described_class.new(key: "hello") }
+  let(:subject) { described_class.new(key: nil) }
   it "gets the current time from the api" do
     expect(subject.current_time).to eq({"tm"=>"20090611 14:42:32"})
   end
 
-  context "route" do
+  context "routes" do
 
     it "gets all the available routes" do
-      expect(subject.routes(49)).to eq([{"rt"=>"1", "rtnm"=>"Indiana/Hyde Park"}, {"rt"=>"2", "rtnm"=>"Hyde Park Express"}, {"rt"=>"3", "rtnm"=>"King Drive"}, {"rt"=>"X3", "rtnm"=>"King Drive Express"}])
+      expect(subject.routes({route_id: 49})).to eq([{"rt"=>"1", "rtnm"=>"Indiana/Hyde Park"}, {"rt"=>"2", "rtnm"=>"Hyde Park Express"}, {"rt"=>"3", "rtnm"=>"King Drive"}, {"rt"=>"X3", "rtnm"=>"King Drive Express"}])
     end
 
     it "should raise exception if route_id is not an integer" do
-      expect { subject.route(49.5) }.to raise_error
+      expect { subject.route({route_id: 49.5}) }.to raise_error
+    end
+
+    it "creates an extension of the form 'getroutes'" do
+      subject.stub(:call_url => true)
+      subject.routes({route_id: 49})
+      expect(subject).to have_received(:call_url).with("getroutes?route_id=49")
     end
   end
 
@@ -32,15 +38,23 @@ describe CtaBusApi do
   context "patterns" do
 
     it "gets all the available patterns" do
-      expect(subject.patterns(20,959)).to eq({"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>[{"seq"=>"1", "typ"=>"S", "stpid"=>"409", "stpnm"=>"Madison & Pulaski", "lat"=>"41.880641167057", "lon"=>"-87.725835442543", "pdist"=>"0.0"}, {"seq"=>"2", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725765705109"}, {"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}]})
+      expect(subject.patterns({route_id: 20, pattern_id: 959})).to eq({"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>[{"seq"=>"1", "typ"=>"S", "stpid"=>"409", "stpnm"=>"Madison & Pulaski", "lat"=>"41.880641167057", "lon"=>"-87.725835442543", "pdist"=>"0.0"}, {"seq"=>"2", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725765705109"}, {"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}]})
+    end
+
+    it "return all the available patterns for a set of pattern_ids" do
+      expect(subject.patterns({route_id: 20, pattern_id: [959, 954]})).to eq({"pid"=>"954", "ln"=>"35569", "rtdir"=>"East Bound", "pt"=>[{"seq"=>"1", "typ"=>"S", "stpid"=>"409", "stpnm"=>"Madison & Pulaski", "lat"=>"41.880641167057", "lon"=>"-87.725835442543", "pdist"=>"0.0"}, {"seq"=>"2", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725765705109"}, {"seq"=>"3", "typ"=>"W", "lat"=>"41.880693089146", "lon"=>"-87.725674510002", "pdist"=>"97.0"}]})
     end
 
     it "raise an exception if route_id is not an Integer" do
-      expect { subject.patterns(20.1,959) }.to raise_error
+      expect { subject.patterns({route_id: 20.2, pattern_id: 959}) }.to raise_error
     end
 
     it "raise an exception if pattern_id is not an Integer" do
-      expect { subject.patterns(20,959.2) }.to raise_exception
+      expect { subject.patterns({route_id: 20, pattern_id: 959.2}) }.to raise_exception
+    end
+
+    it "raise an exception if any of the subpplied pattern_ids is not an Integer" do
+      expect { subject.patterns({route_id: 20, pattern_id: [954, 959.2]}) }.to raise_exception
     end
 
   end
